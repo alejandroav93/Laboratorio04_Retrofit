@@ -1,5 +1,6 @@
 package com.example.retrofit_pokemon.retrofit2;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -10,7 +11,7 @@ public interface Urls {
 
 
     @GET("/api/news")
-    Call<JsonObject> getNoticias();
+    Call<JsonArray> getNoticias();
 
     @GET("/api/covid")
     Call<JsonObject> getCovid();
