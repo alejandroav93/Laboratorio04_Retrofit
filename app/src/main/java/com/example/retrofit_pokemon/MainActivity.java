@@ -2,6 +2,7 @@ package com.example.retrofit_pokemon;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -9,16 +10,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.retrofit_pokemon.retrofit2.ApiRest;
+import com.example.retrofit_pokemon.retrofit2.PokemonAPI;
 import com.example.retrofit_pokemon.retrofit2.Retrofit2;
+import com.example.retrofit_pokemon.retrofit2.ApiRest;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
-import org.w3c.dom.Text;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,42 +33,70 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         EditText editUser, editPassword;
-        TextView btn_Ingresar;
-        btn_Ingresar = findViewById(R.id.btn_ingresar);
+        TextView btn_ingresar;
+        btn_ingresar = findViewById(R.id.btn_ingresar);
         editPassword = findViewById(R.id.edit_password);
         editUser = findViewById(R.id.edit_user);
 
         Usuario.jsonArrayRubros = new JSONArray();
-        btn_Ingresar.setOnClickListener(c->{
 
-        });
+        btn_ingresar.setOnClickListener(v -> {
 
-/*
-        btn_1.setOnClickListener(v -> {
-            ApiRest apiRest = new ApiRest();
-            Call<JsonArray> call = apiRest.getService().getNoticias();
+            //------------------------- RETROFIT 2 -----------------------------------
+            /*Retrofit2 retrofit2 = new Retrofit2();
 
-            call.enqueue(new Callback<JsonArray>() {*/
-            Retrofit2 retrofit2 = new Retrofit2();
-            Call<JsonObject> call = retrofit2.getService().getPokemonById("ditto");
-            call.enqueue(new Callback<JsonObject>() {
+            Call<List<JsonObject>> call = retrofit2.getService().getPokemonById("ditto");
+
+            call.enqueue(new Callback<List<JsonObject>>() {
                 @Override
-                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                    if(response.isSuccessful()) {
-                        JsonObject pokemon = response.body();
+                public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                    if(response.isSuccessful()){
+                        List<JsonObject> pokemon = response.body();
                         JsonArray habilidades = pokemon.getAsJsonArray("abilities");
                         Log.i("pokemon", habilidades.toString());
-                    }
-                    else{
+                    } else {
                         Log.e("error", "Hubo un error inesperado!");
                     }
                 }
+
                 @Override
-                public void onFailure(Call<JsonObject> call, Throwable t) {
+                public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+                }
+            });*/
+
+
+
+            //------------------------- RETROFIT 1 --------------------------------------
+            ApiRest apiRest =  new ApiRest();
+
+            apiRest.getService().wsNoticias(new Callback<String>() {
+                @Override
+                public void success(String s, Response response) {
+
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
 
                 }
             });
 
+        });
 
-        };
     }
+
+    private void abrirPantallaAdmin() {
+
+        Intent i = new Intent(MainActivity.this, Admin.class);
+        startActivity(i);
+
+    }
+    private void abrirPantallaUsuario() {
+
+        Intent i = new Intent(MainActivity.this, Usuario.class);
+        startActivity(i);
+
+    }
+}

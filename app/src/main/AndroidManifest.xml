@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.retrofit_pokemon">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
@@ -9,7 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Retrofit_Pokemon">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".Usuario"
+            android:label="Solicitar Viático">
+        </activity>
+        <activity
+            android:name=".Admin"
+            android:label="Autorizar Viáticos">
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="LOGIN">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
