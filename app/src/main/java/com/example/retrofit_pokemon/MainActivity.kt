@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
                         val imprimirInfo = ("\n\nHabilidad: " +
                                 data!!.getAsJsonArray("abilities")[1].asJsonObject
                                         .getAsJsonObject("ability")["name"]
+                                +"\nID: "+data["id"]
                                 + "\nNombre: " + data["name"]
                                 + "\nExperiencia Base: " + data["base_experience"] +
                                 "\nAltura: " + data["height"] + "0 cm"
