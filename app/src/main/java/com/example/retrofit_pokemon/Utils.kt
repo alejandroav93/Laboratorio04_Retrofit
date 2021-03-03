@@ -1,82 +1,47 @@
-package com.example.retrofit_pokemon;
+package com.example.retrofit_pokemon
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-
-public class Utils {
-
-    Map<String,String> rubros = new Map<String, String>() {
-        @Override
-        public int size() {
-            return 0;
+class Utils {
+    var rubros: Map<String, String> = object : MutableMap<String?, String?> {
+        override fun size(): Int {
+            return 0
         }
 
-        @Override
-        public boolean isEmpty() {
-            return false;
+        override fun isEmpty(): Boolean {
+            return false
         }
 
-        @Override
-        public boolean containsKey(@Nullable Object key) {
-            return false;
+        override fun containsKey(key: Any?): Boolean {
+            return false
         }
 
-        @Override
-        public boolean containsValue(@Nullable Object value) {
-            return false;
+        override fun containsValue(value: Any?): Boolean {
+            return false
         }
 
-        @Nullable
-        @Override
-        public String get(@Nullable Object key) {
-            return null;
+        override operator fun get(key: Any?): String? {
+            return null
         }
 
-        @Nullable
-        @Override
-        public String put(String key, String value) {
-            return null;
+        override fun put(key: String, value: String): String? {
+            return null
         }
 
-        @Nullable
-        @Override
-        public String remove(@Nullable Object key) {
-            return null;
+        override fun remove(key: Any?): String? {
+            return null
         }
 
-        @Override
-        public void putAll(@NonNull Map<? extends String, ? extends String> m) {
-
+        override fun putAll(m: Map<out String, String>) {}
+        override fun clear() {}
+        override fun keySet(): Set<String> {
+            return null
         }
 
-        @Override
-        public void clear() {
-
+        override fun values(): Collection<String> {
+            return null
         }
 
-        @NonNull
-        @Override
-        public Set<String> keySet() {
-            return null;
+        override fun entrySet(): Set<Map.Entry<String, String>> {
+            return null
         }
-
-        @NonNull
-        @Override
-        public Collection<String> values() {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public Set<Entry<String, String>> entrySet() {
-            return null;
-        }
-    };
-
-
-
+    }
 }

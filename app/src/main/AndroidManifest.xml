@@ -12,16 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Retrofit_Pokemon">
         <activity
-            android:name=".Usuario"
-            android:label="Solicitar Viático">
-        </activity>
-        <activity
-            android:name=".Admin"
-            android:label="Autorizar Viáticos">
-        </activity>
-        <activity
             android:name=".MainActivity"
-            android:label="LOGIN">
+            android:label="POKEMON RETROFIT">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
