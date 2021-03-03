@@ -2,7 +2,6 @@ package com.example.retrofit_pokemon
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val btn_ingresar: TextView = findViewById(R.id.btn_ingresar)
         val editUser: EditText = findViewById(R.id.edit_user)
         val pokemon: TextView = findViewById(R.id.mostrar)
-        btn_ingresar.setOnClickListener { v: View? ->
+        btn_ingresar.setOnClickListener {
 
             val retrofit2 = Retrofit2()
             retrofit2.service.getPokemonById(editUser.text.toString().toLowerCase(Locale.ROOT))?.enqueue(object : Callback<JsonObject?> {
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                         if (BuildConfig.DEBUG && data == null) {
                             error("Assertion failed")
                         }
-                        val imprimirInfo = ("\n\nHabilidad: " +
+                        val print = ("\n\nHabilidad: " +
                                 data!!.getAsJsonArray("abilities")[1].asJsonObject
                                         .getAsJsonObject("ability")["name"].toString().toUpperCase(Locale.ROOT)
                                 + "\nID: " + data["id"]
@@ -38,15 +37,15 @@ class MainActivity : AppCompatActivity() {
                                 + "\nExperiencia Base: " + data["base_experience"] +
                                 "\nAltura: " + data["height"] + "0 cm"
                                 + "\nPeso: " + data["weight"] + " gramos")
-                        pokemon.text = imprimirInfo
-                        Log.i("detalle", data.toString())
+                        pokemon.text = print
+                        Log.i("Pokemon", data.toString())
                     } else {
-                        Log.e("error", "Hubo un error inesperado!")
+                        Log.e("Error", "Hubo un error inesperado!")
                     }
                 }
 
                 override fun onFailure(call: Call<JsonObject?>, t: Throwable) {
-                    Log.e("error", t.toString())
+                    Log.e("Error", t.toString())
                 }
             })
         }
