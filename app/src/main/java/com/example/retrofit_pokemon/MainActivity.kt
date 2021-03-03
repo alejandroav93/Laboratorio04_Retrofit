@@ -11,6 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import java.lang.Double.parseDouble
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,8 @@ class MainActivity : AppCompatActivity() {
         val btn_ingresar: TextView = findViewById(R.id.btn_ingresar)
         val editUser: EditText = findViewById(R.id.edit_user)
         val pokemon: TextView = findViewById(R.id.mostrar)
-        btn_ingresar.setOnClickListener {
+
+    btn_ingresar.setOnClickListener {
 
             val retrofit2 = Retrofit2()
             retrofit2.service.getPokemonById(editUser.text.toString().toLowerCase(Locale.ROOT))?.enqueue(object : Callback<JsonObject?> {
@@ -51,3 +53,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+

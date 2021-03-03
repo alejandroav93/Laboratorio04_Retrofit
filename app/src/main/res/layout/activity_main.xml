@@ -21,6 +21,8 @@
             android:id="@+id/edit_user"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:maxLength="50"
             android:autofillHints=""
             android:gravity="center" />
     </LinearLayout>
