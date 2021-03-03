@@ -11,6 +11,7 @@ import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,16 +23,18 @@ class MainActivity : AppCompatActivity() {
         btn_ingresar.setOnClickListener { v: View? ->
 
             val retrofit2 = Retrofit2()
-            retrofit2.service.getPokemonById(editUser.text.toString().toLowerCase())?.enqueue(object : Callback<JsonObject?> {
+            retrofit2.service.getPokemonById(editUser.text.toString().toLowerCase(Locale.ROOT))?.enqueue(object : Callback<JsonObject?> {
                 override fun onResponse(call: Call<JsonObject?>, response: Response<JsonObject?>) {
                     if (response.isSuccessful) {
                         val data: JsonObject? = response.body()
-                        assert(data != null)
+                        if (BuildConfig.DEBUG && data == null) {
+                            error("Assertion failed")
+                        }
                         val imprimirInfo = ("\n\nHabilidad: " +
                                 data!!.getAsJsonArray("abilities")[1].asJsonObject
-                                        .getAsJsonObject("ability")["name"]
-                                +"\nID: "+data["id"]
-                                + "\nNombre: " + data["name"]
+                                        .getAsJsonObject("ability")["name"].toString().toUpperCase(Locale.ROOT)
+                                + "\nID: " + data["id"]
+                                + "\nNombre: " + data["name"].toString().toUpperCase(Locale.ROOT)
                                 + "\nExperiencia Base: " + data["base_experience"] +
                                 "\nAltura: " + data["height"] + "0 cm"
                                 + "\nPeso: " + data["weight"] + " gramos")
